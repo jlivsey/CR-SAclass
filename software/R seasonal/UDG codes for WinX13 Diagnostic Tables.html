@@ -1,0 +1,714 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <style type="text/css">
+table{margin-left:40px;}
+table td{padding-right:10px;vertical-align:top}
+table th{padding-right:10px;}
+ul.spectab{margin-left:20px;}
+ul li{margin-left:40px;}
+td.udg{font-family:Courier,monospace;}
+  </style>
+</head>
+
+<body>
+
+<table rules="groups">
+  <caption><b>"General" Data Table</b></caption> <thead><tr>
+    <th scope="col" nowrap="nowrap">Column Heading</th>
+	<th scope="col">UDG Code</th>
+    <th scope="col">Column Description</th>
+  </tr>
+  </thead> <tbody>
+  <tr>
+      <td>Series Name</td> <td class="udg">srsnam</td>
+      <td>Name of series. This is the <span style="font-style: italic;">name</span> argument
+	  in the series spec, if given, or the name of the output files otherwise.</td>
+    </tr>
+    <tr>
+      <td>View Spec File</td><td></td>
+      <td>Press the button to show the spec file that was used to
+adjust the series. Only works if the row was added automatically when
+the series was run.</td>
+    </tr>
+     <tr><td>Filename</td><td>n/a</td><td>Name of the output files</td></tr>
+    <tr>
+      <td>Period</td><td class="udg">freq</td>
+      <td>Number of observations per year.</td>
+    </tr>
+	   <tr>
+      <td>Transform</td><td><span style="font-family:Courier,monospace;">transform</span> if transformation is hard-coded,
+	  and <span style="font-family:Courier,monospace;">aictrans</span> if chosen by AIC test.</td>
+      <td>Transformation. Includes "**" if the transformation was
+automatically selected.</td>
+    </tr>
+    <tr>
+      <td>Mode</td><td><span style="font-family:Courier,monospace;">samode</span> if transformation is hard-coded,
+	  and <span style="font-family:Courier,monospace;">finmode</span> if chosen by AIC test.</td>
+      <td>Seasonal adjustment mode. Includes "**" if the mode was
+automatically
+selected.</td>
+    </tr>
+ 
+    <tr>
+      <td>Span</td><td class="udg">span</td>
+      <td>Span of data adjusted.</td>
+    </tr>
+       <tr>
+      <td>Outlier Span</td><td class="udg">outlierspan</td>
+      <td>Span of data checked for outliers. </td>
+    </tr>
+    <tr>
+      <td>AO/LS/TC Crit Val</td><td class="udg">aocrit / lscrit / tccrit</td>
+      <td>Critical |t| values for additive outliers, level shifts, and temporary changes,
+	  separated by a slash.
+	  "*" indicates it was chosen by X-13ARIMA-SEATS; "--" indicates this type
+	  of outlier was not searched for. </td>
+    </tr>
+   
+    <tr>
+      <td># Outliers</td><td class="udg">outlier.total</td>
+      <td>Number of hard-coded and automatically selected outliers. </td>
+    </tr>
+    <tr>
+      <td># Auto</td><td class="udg">autoout</td>
+      <td>Number of outliers automatically selected. </td>
+    </tr>
+	<tr>
+      <td># Iter</td><td class="udg">niter, maxiter, tol</td>
+      <td>Number of iterations to reach convergence. If the maximum number of iterations was
+	  changed from the default (1500), the cell will also show an "m". If the convergence
+	  tolerance was changed from the default (0.00001), the cell will also contain a "t".</td>
+    </tr>
+	<td># Forecasts</td><td class="udg">nfcst</td>
+      <td>Number of forecasted values. </td>
+    </tr>
+    <tr>
+      <td>Forecast mode</td><td class="udg">aape.mode</td>
+      <td>Indicates whether forecasts are within sample or out of sample. </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+<table rules = "groups">
+  <caption><b>"Model Info" Data Table</b></caption> <thead><tr>
+    <th scope="col" nowrap="nowrap">Column Heading</th>
+	<th scope="col" >UDG Code</th>
+    <th scope="col">Column Description</th>
+  </tr>
+  </thead> <tbody>
+    <tr>
+      <td>Series Name</td><td class="udg">srsnam</td>
+      <td>Name of series.</td>
+    </tr>
+    <tr>
+      <td>Model Span</td><td class="udg">modelspan</td>
+      <td>Span of data used to estimate regARIMA model coefficients. </td>
+    </tr>
+    <tr>
+      <td>ARIMA Model</td><td><span style="font-family: Courier,monospace;">arimamdl</span> gives the model. 
+	  <span style="font-family: Courier,monospace;">
+automdltype</span> tells whether it was automatically selected.</td>
+      <td>ARIMA model; "**" indicates the model was selected
+automatically by the program. </td>
+    </tr>
+    
+    <tr>
+      <td>Regressors</td><td span="udg">finalreg01, finalreg01,...</td>
+      <td>The regressors included in the model. </td>
+    </tr>
+    <tr>
+      <td>Trading Day</td><td><a href="#regs">See regressor info below</a></td>
+      <td>Trading day regressors included, with t-values if only one
+regressor and p-values of the chi-squared test of groups of regressors
+if multiple regressors; "**" indicates trading day was included based
+on
+results of AIC test.</td>
+    </tr>
+    <tr>
+      <td>Holiday</td><td><a href="#regs">See regressor info below</a></td>
+      <td>Easter, Thanksgiving, or Labor Day regressors (with their
+t-values) included; "**" indicates Easter was included based on results
+of
+AIC test. </td>
+    </tr>
+    <tr>
+      <td>Seasonal</td><td><a href="#regs">See regressor info below</a></td>
+      <td>Seasonal or trigonometric seasonal regressors included, with
+the p-value of the chi-squared test. </td>
+    </tr>
+    <tr>
+      <td>Constant</td><td><a href="#regs">See regressor info below</a></td>
+      <td>Gives the t-value of the constant, if it is included. </td>
+    </tr>
+    <tr>
+      <td>User</td><td><a href="#regs">See regressor info below</a></td>
+      <td>Gives t-values of user defined regressors included, and
+p-value of the chi-squared test of the group of regressors, if there is
+more than one; "**" indicates user regressors are included based on
+results of AIC test. </td>
+    </tr>
+    <tr>
+      <td>Coded Outliers</td><td><a href="#regs">See regressor info below</a></td>
+      <td>The outliers hard-coded in the spec file, with their
+t-values. </td>
+    </tr>
+	<tr>
+      <td>Auto Outliers</td><td><a href="#regs">See regressor info below</a></td>
+      <td>The outliers automatically found, with their
+t-values. </td>
+    </tr>
+	<tr>
+      <td>Variance</td><td class="udg">variance$mle</td>
+      <td>Innovation variance of the ARIMA model. </td>
+    </tr>
+    <tr>
+      <td>Phi1</td><td class="udg">AR$Nonseasonal$01$01</td>
+      <td>Estimate of nonseasonal AR parameter at lag 1. </td>
+    </tr>
+    <tr>
+      <td>Sum NS AR</td><td>Sum of <span style="font-family:Courier,monospace">AR$Nonseasonal$01$01</span> to 
+	  <span style="font-family:Courier,monospace">AR$Nonseasonal$01$0p</span>, where p is the nonseasonal AR order</td>
+      <td>Sum of all nonseasonal AR parameter estimates. </td>
+    </tr>
+    <tr>
+      <td>Theta1</td><td class="udg">MA$Nonseasonal$01$01</td>
+      <td>Estimate of nonseasonal MA parameter at lag 1. </td>
+    </tr>
+    <tr>
+      <td>Sum NS MA</td><td>Sum of <span style="font-family:Courier,monospace">MA$Nonseasonal$01$01</span> to 
+	  <span style="font-family:Courier,monospace">MA$Nonseasonal$01$0q</span>, where q is the nonseasonal MA order</td>
+      <td>Sum of all nonseasonal MA parameter estimates. </td>
+    </tr>
+    <tr>
+      <td>Sum Seas AR</td><td>Sum of <span style="font-family:Courier,monospace">AR$Seasonal$s$s</span> to 
+	  <span style="font-family:Courier,monospace">AR$Seasonal$s$P</span>, where s is the period and P is the seasonal AR order times s</td>
+      <td>Sum of all seasonal AR parameter estimates. </td>
+    </tr>
+    <tr>
+      <td>Sum Seas MA</td><td>Sum of <span style="font-family:Courier,monospace">MA$Seasonal$s$s</span> to 
+	  <span style="font-family:Courier,monospace">MA$Seasonal$s$Q</span>, where s is the period and Q is the seasonal MA order times s</td>
+      <td>Sum of all seasonal MA parameter estimates. </td>
+    </tr>
+	<tr>
+	<td>Successful SEATS Adj?</td><td><span style="font-family:Courier,monospace">samode</span> tells whether it's a SEATS adjustment;
+	<span style="font-family:Courier,monospace">seatsadj</span> tells whether the SEATS adjustment was successful.</td>
+	<td>If a SEATS adjustment was requested and the decomposition was not successful
+	(that is, there is no seasonal adjustment), this column will be 'no'. If it was successful,
+	if will say 'yes'. If no SEATS decomposition was attempted, it will read 'n/a'.</td>
+	</tr>
+	<tr>
+	<td>SEATS Model</td><td>Compares <span style="font-family:Courier,monospace">arimamdl</span> to <span style="font-family:Courier,monospace">
+	seatsmdl</span></td>
+	<td>If the SEATS procedure changed the ARIMA model specified by the arima{} spec or
+	selected by the automatic model procedure, then this column will give the SEATS model.</td>
+	</tr>
+  </tbody>
+</table>
+<br>
+<table rules= "groups">
+  <caption><b>"Model Diagnostics" Data Table</b></caption> <thead><tr>
+    <th scope="col" nowrap="nowrap">Column Heading</th>
+	<th scope="col">UDG Code</th>
+    <th scope="col">Column Description</th>
+  </tr>
+  </thead> <tbody>
+    <tr>
+      <td>Series Name</td><td><span style="font-family:Courier,monospace"></span></td>
+      <td>Name of series.</td>
+    </tr>
+    <tr>
+      <td>AICC</td><td><span style="font-family:Courier,monospace">aicc</span></td>
+      <td>F-adjusted Akaike's Information Criterion (corrected for sample size). </td>
+    </tr>
+    <tr>
+      
+    <tr>
+      <td>aa FcE (3-yr)</td><td><span style="font-family:Courier,monospace">aape.0</span></td>
+      <td>Average absolute percentage error of forecasts in the last
+three years. An average of the 1-step ahead to 12-step ahead (4-step ahead for
+quarterly series) forecasts of the data with one, two and three years removed.
+By default, this is calculated using within-sample forecasts,
+but it can be done with out-of-sample forecasts if requested.</td>
+    </tr>
+    <tr>
+      <td>Normal?</td><td><span style="font-family:Courier,monospace">skewness</span> ends with "+" or "-" if residuals are skewed;
+	  <span style="font-family:Courier,monospace">a</span> ends with "*" if Geary's a test indicates non-normality;
+	  <span style="font-family:Courier,monospace">kurtosis</span> ends with "*" if the kurtosis test indicates non-normality. </span></td>
+      <td>Indicates whether residuals pass normality tests. If they fail the skewness test: "skewed +/-"; if they aren't skewed
+	  but fail Geary's a test: "failed (a)"; if they aren't skewed and pass Geary's a but fail the kurtosis test: "failed (k)".</td>
+    </tr>
+    <tr>
+      <td># LBQ Fail</td><td><span style="font-family:Courier,monospace">nlbq</span></td>
+      <td>Number of the lags from 1 to 24 with significant Ljung-Box Q
+statistic. </td>
+    </tr>
+    <tr>
+      <td>Sig LBQ</td><td><span style="font-family:Courier,monospace">lblags</span></td>
+      <td>List of lags with significant LBQ. </td>
+    </tr>
+    <tr>
+      <td>Sig Seas LBQ</td><td>List of the seasonal lags in <span style="font-family:Courier,monospace">lblags</span></td>
+      <td>Seasonal lags with significant LBQ. </td>
+    </tr>
+	<tr>
+      <td># BPQ Fail</td><td><span style="font-family:Courier,monospace">nbpq</span></td>
+      <td>Number of the lags from 1 to 24 with significant Box-Pierce Q
+statistic. </td>
+    </tr>
+    <tr>
+      <td>Sig BPQ</td><td><span style="font-family:Courier,monospace">bplags</span></td>
+      <td>List of lags with significant BPQ. </td>
+    </tr>
+    <tr>
+      <td>Sig Seas BPQ</td><td>List of the seasonal lags in <span style="font-family:Courier,monospace">bplags</span></td>
+      <td>Seasonal lags with significant BPQ. </td>
+    </tr>
+    <tr>
+      <td>Sig ACF</td><td><span style="font-family:Courier,monospace">sigacflags</span></td>
+      <td>Lags with significant autocorrelation in the residuals. </td>
+    </tr>
+    <tr>
+      <td>Sig Seas ACF</td><td>List of the seasonal lags in <span style="font-family:Courier,monospace">sigacflags</span></td>
+      <td>Seasonal lags with significant autocorrelation in the
+residuals. </td>
+    </tr>
+    <tr>
+      <td>Sig PACF</td><td><span style="font-family:Courier,monospace">sigpacflags</span></td>
+      <td>Lags with significant partial autocorrelation in the
+residuals. </td>
+    </tr>
+    <tr>
+      <td>Sig Seas PACF</td><td>List of the seasonal lags in <span style="font-family:Courier,monospace">sigpacflags</span></td>
+      <td>Seasonal lags with significant partial autocorrelation in the
+residuals. </td>
+    </tr>
+	<tr>
+      <td>Resid Peaks</td><td><span style="font-family:Courier,monospace">spcrsd.s1, spcrsd.s2, spcrsd.s3, spcrsd.s4, spcrsd.s5,
+	  spcrsd.t1, spcrsd.t2</span>: If the peak height is 6.0 or greater and the udg entry ends with a "+" to indicate the
+	  peak is greater than the median, it is visually significant.</td>
+      <td>Indicates the visually significant seasonal and trading day
+peaks in the spectrum of the model residuals.</td>
+    </tr>
+    <tr>
+      <td>QS Residuals</td><td><span style="font-family:Courier,monospace">qsrsd[2]</span></td>
+      <td>QS statistic of the residuals. </td>
+    </tr>
+    <tr>
+      <td>QSS Residuals</td><td><span style="font-family:Courier,monospace">qssrsd[2]</span></td>
+      <td>QS statistic of the residuals on the last 96 observations (8 years for a monthly series). </td>
+    </tr>
+	<tr><td>Avg Sq Fcst Err 1 Period</td><td></td><td></td></tr>
+	<tr><td>Avg Sq Fcst Err 1 Year</td><td></td><td></td></tr>
+    
+  </tbody>
+</table>
+<br>
+<table rules="groups">
+  <caption><b>"x11" Data Table</b></caption> <thead><tr>
+    <th scope="col" nowrap="nowrap">Column Heading</th>
+	<th scope="col">UDG Code</th>
+    <th scope="col">Column Description</th>
+  </tr>
+  </thead> <tbody>
+    <tr>
+      <td>Series Name</td><td><span style="font-family:Courier,monospace">srsnam</span></td>
+      <td>Name of series.</td>
+    </tr>
+	
+      <tr>
+      <td>Sigma Lim</td><td><span style="font-family:Courier,monospace">siglim</span></td>
+      <td>Lower and upper sigma limits for downweighting extreme
+values. </td>
+    </tr>
+    <tr>
+      <td>Seasonal MA</td><td><span style="font-family:Courier,monospace">seasonalma</span> if the filter is hard-coded;
+	  <span style="font-family:Courier,monospace">sfmsr</span> if it's automatically selected.</td>
+      <td>Seasonal moving average filter; "**" indicates the filter was
+chosen by X-13ARIMA-SEATS. </td>
+    </tr>
+	<tr>
+	<td>Trend MA</td><td><span style="font-family:Courier,monospace">trendma</span> if the filter length is hard-coded;
+	<span style="font-family:Courier,monospace">finaltrendma</span> if it's automatically selected.</td>
+	<td>Length of the final Henderson trend filter; "**" indicates the filter was chosen by X-13ARIMA-SEATS.</td>
+	</tr>
+	
+	<tr>
+	<td>I/S Ratio</td><td><span style="font-family:Courier,monospace">f2.is</span></td>
+	<td>The final irregular/seasonal Ratio from Table D10; also called the global moving seasonality ratio.</td>
+	</tr>
+	<tr>
+	<td>I/C Ratio</td><td><span style="font-family:Courier,monospace">f2.ic</span></td>
+	<td>The final irregular/trend ratio from Table D12.</td>
+	</tr>
+	<tr>
+      <td>D8F</td><td><span style="font-family:Courier,monospace">f2.fsd8[1]</span></td>
+      <td>F-statistic of test for seasonality assuming stability from
+D8 table. </td>
+    </tr>
+    <tr>
+      <td>D8F p-val</td><td><span style="font-family:Courier,monospace">f2.fsd8[2]</span>/100</td>
+      <td>p-value of D8 F statistic. </td>
+    </tr>
+	<tr>
+      <td>D11F</td><td><span style="font-family:Courier,monospace">d11.f[2]</span>/100</td>
+      <td>p-value of D11 F statistic for residual seasonality. </td>
+    </tr>
+	<tr>
+      <td>D11F 3 yr</td><td><span style="font-family:Courier,monospace">d11.3y.f[2]</span>/100</td>
+      <td>p-value of D11 F statistic for residual seasonality in the last three years. </td>
+    </tr>
+    <tr>
+      <td>M1</td><td><span style="font-family:Courier,monospace">f3.m01</span></td>
+      <td>The relative contribution of the irregular over three months
+span.<br>
+      </td>
+    </tr>
+    <tr>
+      <td>M2</td><td><span style="font-family:Courier,monospace">f3.m02</span></td>
+      <td>The relative contribution of the irregular component to the
+stationary portion of the variance.<br>
+      </td>
+    </tr>
+    <tr>
+      <td>M3</td><td><span style="font-family:Courier,monospace">f3.m03</span></td>
+      <td>The amount of period-to-period change in the irregular
+component as compared to the amount of period-to- period change in the
+trend-cycle.<br>
+      </td>
+    </tr>
+    <tr>
+      <td>M4</td><td><span style="font-family:Courier,monospace">f3.m04</span></td>
+      <td>The amount of autocorrelation in the irregular as described
+by the average duration of run. </td>
+    </tr>
+    <tr>
+      <td>M5</td><td><span style="font-family:Courier,monospace">f3.m05</span></td>
+      <td>The number of months it takes the change in the trend-cycle
+to surpass the amount of change in the irregular.<br>
+      </td>
+    </tr>
+    <tr>
+      <td>M6</td><td><span style="font-family:Courier,monospace">f3.m06</span></td>
+      <td>The amount of year-to-year change in the irregular as
+compared to the amount of year-to-year change in the seasonal.<br>
+      </td>
+    </tr>
+    <tr>
+      <td>M7</td><td><span style="font-family:Courier,monospace">f3.m07</span></td>
+      <td>The amount of moving seasonality present relative to the
+amount of stable seasonality.<br>
+      </td>
+    </tr>
+    <tr>
+      <td>M8</td><td><span style="font-family:Courier,monospace">f3.m08</span></td>
+      <td>The size of the fluctuations in the seasonal component
+throughout the whole series.<br>
+      </td>
+    </tr>
+    <tr>
+      <td>M9</td><td><span style="font-family:Courier,monospace">f3.m09</span></td>
+      <td>The average linear movement in the seasonal component.<br>
+      </td>
+    </tr>
+    <tr>
+      <td>M10</td><td><span style="font-family:Courier,monospace">f3.m10</span></td>
+      <td>As M8, calculated for recent years only.<br>
+      </td>
+    </tr>
+    <tr>
+      <td>M11</td><td><span style="font-family:Courier,monospace">f3.m11</span></td>
+      <td>As M9, calculated for recent years only.<br>
+      </td>
+    </tr>
+    <tr>
+      <td>Q</td><td><span style="font-family:Courier,monospace">f3.q</span></td>
+      <td>A weighted average of M1-M11.<br>
+      </td>
+    </tr>
+    <tr>
+      <td>Q2</td><td><span style="font-family:Courier,monospace">f2.qm2</span></td>
+      <td>A weighted average of M1-M11 without M2.<br>
+      </td>
+    </tr>
+    
+	<tr>
+	<td>MCD</td><td><span style="font-family:Courier,monospace">f2.mcd</span></td>
+	<td>Months for Cyclical Dominance</td>
+	</tr>
+  </tbody>
+</table>
+<table rules="groups">
+  <caption><b>"Spectrum & QS" Data Table</b></caption> <thead><tr>
+    <th scope="col" nowrap="nowrap">Column Heading</th>
+	<th scope="col">UDG Code</th>
+    <th scope="col">Column Description</th>
+  </tr>
+  </thead> <tbody>
+    <tr>
+      <td>Series Name</td><td><span style="font-family:Courier,monospace">srsnam</span></td>
+      <td>Name of series.</td>
+    </tr>
+    	<tr>
+      <td>Sig Ori Peaks</td><td><span style="font-family:Courier,monospace">spcori.s1, spcori.s2, spcori.s3,
+	  spcori.s4, spcori.s5, spcori.t1, spcori.t2:</span> If the peak height is 6.0 or greater and the udg entry ends with a "+" to
+	  indicate the peak is greater than the median, it is visually significant.</td>
+      <td>Indicates the visually significant seasonal and trading day peaks
+in the spectrum of the (possibly differenced, transformed, prior-adjusted) original
+series.</td>
+    </tr>
+	<tr>
+		<td>QS Ori</td><td><span style="font-family:Courier,monospace">qsori[2]</span></td>
+		<td>QS statistic of the original series.</td>
+	</tr>
+	<tr>
+		<td>QSS Ori</td><td><span style="font-family:Courier,monospace">qssori[2]</span></td>
+		<td>QS statistic of the original series calculated using the spectrum span.</td>
+	</tr>
+	<tr>
+		<td>QS Ori Adj Ext</td><td><span style="font-family:Courier,monospace">qsorievadj[2]</span></td>
+		<td>QS statistic of the original series adjusted for extreme values.</td>
+	</tr>
+	<tr>
+		<td>QSS Ori Adj Ext</td><td><span style="font-family:Courier,monospace">qssorievadj[2]</span></td>
+		<td>QS statistic of the original series adjusted for extreme values calculated using the spectrum span.</td>
+	</tr>
+	<tr><td>Tukey Ori Peaks</td><td>Lists the frequencies where <span style="font-family:Courier,monospace">spcori.tukey.s1,
+	spcori.tukey.s2, spcori.tukey.s3, spcori.tukey.s4, spcori.tukey.s5, spcori.tukey.td</span> are greater than
+	0.99 or 0.90.</td>
+	<td>Lists the seasonal and trading day frequencies where the Tukey spectrum of the original series has a peak
+	with a significance level greater than 0.99 or 0.90.</td>
+    <tr>
+      <td>Sig SAdj Peaks</td><td><span style="font-family:Courier,monospace">spcsa.s1, spcsa.s2, spcsa.s3,
+	  spcsa.s4, spcsa.s5, spcsa.t1, spcsa.t2:</span> If the peak height is 6.0 or greater and the udg entry ends with a "+" to
+	  indicate the peak is greater than the median, it is visually significant.</td>
+      <td>Indicates the visually significant seasonal and trading day
+peaks in the spectrum of the seasonally adjusted series.</td>
+    </tr>
+    <tr>
+      <td>Sig Irr Peaks</td><td><span style="font-family:Courier,monospace">spcirr.s1, spcirr.s2, spcirr.s3,
+	  spcirr.s4, spcirr.s5, spcirr.t1, spcirr.t2:</span> If the peak height is 6.0 or greater and the udg entry ends with a "+" to
+	  indicate the peak is greater than the median, it is visually significant.</td>
+      <td>Indicates the visually significant seasonal and trading day
+peaks in the spectrum of the modified irregular.</td>
+    </tr>
+    
+
+	<tr>
+      <td>Nonsig Seasonal Peaks</td><td>Looks at all the S1-S4 spectrum entries (see columns Sig Ori Peaks, Sig SAdj Peaks,
+	  Sig Irr Peaks, and Resid Peaks) for peaks less than 6.0 or not greater than the median.</td>
+      <td>Indicates whether there is a nonsignificant peak at any of S1, S2, S3, or S4
+	  in the spectrum of the seasonally adjusted series ("sadj"), irregular ("irr"),
+	  or residuals ("rsd"). Also gives the height in stars of the tallest of these peaks.</td>
+    </tr>
+    <tr>
+      <td>Nonsig TD Peaks</td><td>Looks at all the T1 spectrum entries (see columns Sig Ori Peaks, Sig SAdj Peaks,
+	  Sig Irr Peaks, and Resid Peaks) for peaks less than 6.0 or not greater than the median.</td>
+      <td>Indicates whether there is a nonsignificant peak at T1
+	  in the spectrum of the seasonally adjusted series ("sadj"), irregular ("irr"),
+	  or residuals ("rsd"). Also gives the height in stars of the tallest of these peaks.</td>
+    </tr>
+	<tr>
+		<td>QS Sadj</td><td><span style="font-family:Courier,monospace">qssadj[2]</span></td>
+		<td>QS statistic of the seasonally adjusted series.</td>
+	</tr>
+	<tr>
+		<td>QSS Sadj</td><td><span style="font-family:Courier,monospace">qsssadj[2]</span></td>
+		<td>QS statistic of the seasonally adjusted series calculated using the spectrum span.</td>
+	</tr>
+	<tr>
+		<td>QS Sadj Adj Ext</td><td><span style="font-family:Courier,monospace">qssadjevadj[2]</span></td>
+		<td>QS statistic of the seasonally adjusted series adjusted for extreme values.</td>
+	</tr>
+	<tr>
+		<td>QSS Sadj Adj Ext</td><td><span style="font-family:Courier,monospace">qsssadjevadj[2]</span></td>
+		<td>QS statistic of the seasonally adjusted series adjusted for extreme values calculated using the spectrum span.</td>
+	</tr>
+	<tr>
+		<td>QS Irr</td><td><span style="font-family:Courier,monospace">qsirr[2]</span></td>
+		<td>QS statistic of the irregular component.</td>
+	</tr>
+	<tr>
+		<td>QSS Irr</td><td><span style="font-family:Courier,monospace">qssirr[2]</span></td>
+		<td>QS statistic of the irregular component calculated using the spectrum span.</td>
+	</tr>
+	<tr>
+		<td>QS Irr Adj Ext</td><td><span style="font-family:Courier,monospace">qsirrevadj[2]</span></td>
+		<td>QS statistic of the irregular component adjusted for extreme values.</td>
+	</tr>
+	<tr>
+		<td>QSS Irr Adj Ext</td><td><span style="font-family:Courier,monospace">qssirrevadj[2]</span></td>
+		<td>QS statistic of the irregular component adjusted for extreme values calculated using the spectrum span.</td>
+	</tr>
+	<tr><td>Tukey Sadj Peaks</td><td>Lists the frequencies where <span style="font-family:Courier,monospace">spcsa.tukey.s1,
+	spcsa.tukey.s2, spcsa.tukey.s3, spcsa.tukey.s4, spcsa.tukey.s5, spcsa.tukey.td</span> are greater than
+	0.99 or 0.90.</td>
+	<td>Lists the seasonal and trading day frequencies where the Tukey spectrum of the seasonally adjusted series has a peak
+	with a significance level greater than 0.99 or 0.90.</td>
+    <tr>
+	<tr><td>Tukey Irr Peaks</td><td>Lists the frequencies where <span style="font-family:Courier,monospace">spcirr.tukey.s1,
+	spcirr.tukey.s2, spcirr.tukey.s3, spcirr.tukey.s4, spcirr.tukey.s5, spcirr.tukey.td</span> are greater than
+	0.99 or 0.90.</td>
+	<td>Lists the seasonal and trading day frequencies where the Tukey spectrum of the irregular has a peak
+	with a significance level greater than 0.99 or 0.90.</td>
+    <tr>
+	<tr><td>Tukey Rsd Peaks</td><td>Lists the frequencies where <span style="font-family:Courier,monospace">spcrsd.tukey.s1,
+	spcrsd.tukey.s2, spcrsd.tukey.s3, spcrsd.tukey.s4, spcrsd.tukey.s5, spcrsd.tukey.td</span> are greater than
+	0.99 or 0.90.</td>
+	<td>Lists the seasonal and trading day frequencies where the Tukey spectrum of the residuals has a peak
+	with a significance level greater than 0.99 or 0.90.</td>
+    <tr>
+  </tbody>
+</table>
+<br>
+<table rules="groups">
+  <caption><b>"Stability Diagnostics" Data Table</b></caption> <thead><tr>
+    <th scope="col" nowrap="nowrap">Column Heading</th>
+	<th scope="col">UDG Code</th>
+    <th scope="col">Column Description</th>
+  </tr>
+  </thead> <tbody>
+    <tr>
+      <td>Series Name</td><td><span style="font-family:Courier,monospace">srsnam</span></td>
+      <td>Name of series.</td>
+    </tr>
+    <tr>
+      <td>Rev Span</td><td><span style="font-family:Courier,monospace">revspan</span></td>
+      <td>Span of data of revision history analysis. </td>
+    </tr>
+    <tr>
+      <td>SA.AAR</td><td><span style="font-family:Courier,monospace">r01.lag00.aar.all</span></td>
+      <td>Average absolute percent revisions of the seasonal
+adjustments. </td>
+    </tr>
+    <tr>
+      <td>MM.AAR</td><td><span style="font-family:Courier,monospace">r02.lag00.aar.all</span></td>
+      <td>Average absolute revision of the month-to-month percent
+change of the adjustments. </td>
+    </tr>
+    <tr>
+      <td>#Spans</td><td><span style="font-family:Courier,monospace">ssa[1]</span></td>
+      <td>Number of spans for sliding spans analysis. </td>
+    </tr>
+    <tr>
+      <td>Span Length</td><td><span style="font-family:Courier,monospace">ssa[2]</span></td>
+      <td>Length of each span. </td>
+    </tr>
+    <tr>
+      <td>SF Cut</td><td><span style="font-family:Courier,monospace">sscut[1]</span></td>
+      <td>Threshold value for the seasonal factors. </td>
+    </tr>
+    <tr>
+      <td>SF75p</td><td><span style="font-family:Courier,monospace">s3.a.hinge[4]</span></td>
+      <td>75th percentile of maximum percent differences across spans
+of seasonal factors. </td>
+    </tr>
+    <tr>
+      <td>SF%</td><td><span style="font-family:Courier,monospace">s2.a.per[3]</span></td>
+      <td>Percent of months (quarters) with a maximum absolute percent
+change of the seasonal factors greater than the threshold. </td>
+    </tr>
+    
+    <tr>
+      <td>SA Cut</td><td><span style="font-family:Courier,monospace">sscut[3]</span></td>
+      <td>Threshold value for the seasonal adjustment values. </td>
+    </tr>
+    <tr>
+      <td>SA75p</td><td><span style="font-family:Courier,monospace">s3.c.hinge[4]</span></td>
+      <td>75th percentile of maximum percent differences across spans
+of the seasonally adjusted series. </td>
+    </tr>
+    <tr>
+      <td>SA%</td><td><span style="font-family:Courier,monospace">s2.c.per[3]</span></td>
+      <td>Percent of months (quarters) with a maximum absolute percent
+change of the seasonal adjustment values greater than the threshold. </td>
+    </tr>
+    <tr>
+      <td>MM Cut</td><td><span style="font-family:Courier,monospace">sscut[4]</span></td>
+      <td>Threshold value for the period-to-period percent change in the
+seasonally adjusted series. </td>
+    </tr>
+    <tr>
+      <td>MM60p</td><td><span style="font-family:Courier,monospace">s3.d.hinge[4]</span></td>
+      <td>60th percentile of maximum percent differences across spans
+of period-to-period changes in the seasonally adjusted series. </td>
+    </tr>
+    <tr>
+      <td>MM%</td><td><span style="font-family:Courier,monospace">s2.d.per[3]</span></td>
+      <td>Percent of months (quarters) with a maximum absolute
+difference of period-to-period change in the seasonally adjusted series
+greater than the threshold. </td>
+    </tr>
+	<tr>
+      <td>TD Cut</td><td><span style="font-family:Courier,monospace">sscut[2]</span></td>
+      <td>Threshold value for trading day factors. </td>
+    </tr>
+    <tr>
+      <td>TD75p</td><td><span style="font-family:Courier,monospace">s3.b.hinge[4]</span></td>
+      <td>75th percentile of maximum percent differences across spans
+of trading day factors. </td>
+    </tr>
+    <tr>
+      <td>TD%</td><td><span style="font-family:Courier,monospace">s2.b.per[3]</span></td>
+      <td>Percent of months (quarters) with a maximum absolute percent
+change of the trading day factors greater than the threshold. </td>
+    </tr>
+    <tr>
+      <td>YY Cut</td><td><span style="font-family:Courier,monospace">sscut[5]</span></td>
+      <td>Threshold value for the year-to-year change in the seasonally
+adjusted series. </td>
+    </tr>
+    <tr>
+      <td>YY90p</td><td><span style="font-family:Courier,monospace">s3.e.hinge[5]</span></td>
+      <td>90th percentile of maximum percent differences across spans
+of year-to-year changes in the seasonally adjusted series. </td>
+    </tr>
+    <tr>
+      <td>YY%</td><td><span style="font-family:Courier,monospace">s2.e.per[3]</span></td>
+      <td>Percent of months (quarters) with a maximum absolute
+difference of year-to-year change in the seasonally adjusted series
+greater than the threshold. </td>
+    </tr>
+  </tbody>
+</table>
+<a name="regs"><p><em>Regressor information</em></p>
+<p>Regression variables have a two-part name in the udg file, separated by a '$'. The first part is the type
+of regression variable, and the second a more specific identifier. The values are in three parts: the estimate,
+the standard error, and the t-value.</p>
+<p><i>Outliers</i></p>
+<p>Hard-coded outliers are listed as Outlier$XXyyyy.mm (where Mm can be a 1-digit number, 2-digit number, or 3-letter
+abbreviation of the month and XX is the outlier type). Automatically identified outliers are referred to as AutoOutlier$XXyyyy.mm.</p>
+
+<p><i>Trading Day</i></p>
+<p>The first part of the trading day regressor name refers to the type of trading day regressor. It's either</p>
+<ul><li>Trading Day</li>  <li>1-Coefficient Trading Day</li> <li>Stock Trading Day[w]</li>  <li>1-Coefficient Stock Trading Day[w]</li> </ul>
+<p>where w is replaced with the day of the inventory (often 31 for end-of-month inventories or 1 for beginning-of-month inventories.
+The second part is Weekday for the 1-coefficient trading days. For the 6-coefficient trading day variables there are six entries
+in the udg file, with the second part of the name being a three letter abbreviation of the day: Mon, Tue, Wed, Thu, Fri, Sat. </p>
+<p>When
+there is no transformation the default trading day regressor includes a variable for leap year or length of month/quarter; look for
+Leap Year$Leap Year, Length-of-Month$Length-of-Month, or Length-of-Quarter$Length-of-Quarter.</p>
+<p>Trading day regressors with more than one variable will also have an F-test for the combined effect. The udg file name for this is
+ftest$Trading Day or ftest$Stock Trading Day[w]. The value has four numbers: the two degrees of freedom, the F-statistic, and the p-value.</p>
+<p><i>Holidays</i></p>
+<p>Holidays are listed as:
+<ul>
+<li>Easter[w]$Easter[w]</li>
+<li>StockEaster[w]$StockEaster[w]</li>
+<li>Labor[w]$Labor[2]</li>
+<li>Thanksgiving[w]$Thanksgiving[w]</li>
+</ul>.
+<p><i>Seasonal Regressors</i></p>
+<p>Each seasonal regressor has Seasonal as the first part of the name and a three-letter abbreviation for the month or
+1st, 2nd, 3rd, and 4th for the quarter.<p>
+<p>The F-test for the combined seasonal regressors is given as ftest$Seasonal. The value has four numbers: the two degrees of freedom,
+the F-statistic, and the p-value.</p>
+<p><i>User-defined Regressors</i></p>
+<p>For user-defined regressors with the default usertype, the first part of the name is User-defined and
+ the second part is the name given in the user argument in the spec file. If a usertype is provided, the first part of the name reflects that;
+ for example, User-defined Trading Day, User-defined Holiday, etc.</p>
+
+</body>
