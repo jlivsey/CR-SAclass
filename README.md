@@ -1,4 +1,5 @@
 # CR-SAclass
+
 Material for USCB Class on Seasonal Adjustment taught in Costa Rica 2019
 
 This repo contains:
@@ -23,3 +24,5 @@ People will be able to do all the exercises with Census software -- Win X-13, X-
 
 `install(seasonalview)`
 
+
+### Course Review: <https://forms.gle/zkhMNiPWU9PYAB5m6>
