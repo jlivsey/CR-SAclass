@@ -5,17 +5,20 @@ series{
     format = Datevalue
 }
 transform{ 
-    function = auto 
+    function = log
     savelog = atr
 }
 regression{ 
-    aictest = ( td easter )
+   variables = ( td  TC2001.10
+ AO2005.7 LS2008.10 AO2009.8 ) 
+    #aictest = ( td easter )
     savelog = aictest
 }
 outlier{ 
     types = ( AO LS TC )
 }
-automdl{ savelog = amd }
+arima{ model=(0 1 1)(0 1 1) }
+#automdl{ savelog = amd }
 forecast{ 
     maxlead = 12
     print = none
