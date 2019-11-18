@@ -25,4 +25,6 @@ People will be able to do all the exercises with Census software -- Win X-13, X-
 `install(seasonalview)`
 
 
-### Course Review: <https://forms.gle/zkhMNiPWU9PYAB5m6>
+### Course Review: 
+
+Thank you for completing the course review. If you did not get a chance to fill out our survey and would like the link please feel free to reach out to me. 
